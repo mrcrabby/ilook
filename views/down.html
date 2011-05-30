@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% if book.is_ready %}
+{% block title %}{{ book.name }}{% end %}
+{% end %}
+
+{% block body %}
+<div id="request">
+{% if not book.is_ready %}
+服务器下载中，请记住网址稍候来下载！
+{% else %}
+ <h1>{{ book.name }}</h1>
+ <p>请选择你喜欢的格式下载： 
+    {% if book.epub %} <a href="{{ book.id }}.epub">epub</a> {% end %}
+    {% if book.mobi %} <a href="{{ book.id }}.mobi">mobi</a> {% end %}
+ </p>
+{% end %}
+</div>
+{% end %}
