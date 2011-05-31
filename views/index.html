@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script type="text/javascript">
+jQuery(document).ready(function($){
+  if (navigator.platform == "iPad") return;
+  jQuery(".img img").lazyload({
+    effect:"fadeIn",
+    placeholder: "/static/pics/grey.gif"
+  });
+});
+</script>
+{% end %}
+
+{% block body %}
+  <div id="content">
+  <h1>
+        欢迎来小憩      </h1>
+  <div class="grid-16-8 clearfix">
+    <div class="article">
+      <!--notice-->
+            <div id="discover" cl="">
+        <p class="p1">发现最适合你的书籍、电影、朋友</p>
+        <p class="p2">以及未知的一切</p>
+        <p>我们阅读和思考</p>
+        我们喜欢kindle ,ipad 和所有新潮的电子产品....<br>
+        <div id="discover_b"> <a class="rr" href="/about.html">&gt;&gt;了解我们</a> <a class="ad_7day_button" href="/sign/signreg.html"><span><strong>加入</strong>更精彩</span></a> </div>
+      </div>
+        <!--end notice-->
+      <!--begin albums-->
+      <!--end albums-->
+      <!--begin commend-->
+        <div class="clear"></div>
+      <div class="movie_new">
+        <h2 class="green_tab clearfix">
+          <div class="ll">看书 · · · · · ·<span class="pl">( <a href="/movie">more</a> ) </span></div>
+        </h2>
+        <ul class="content clearfix" id="newcontent1">
+          {% for entry in entries %}
+          <li class="clearfix">
+            <div class="img">
+              <a onclick="" href="/subject/1.html">
+                <img src="data/{{ escape(entry['cover']) }}" original="data/{{ escape(entry['cover']) }}" style="display: inline;height:96px; "></a>
+            </div>
+            <div class="intro">
+              <h3><a href="/subject/1.html">{{ escape(entry['bookname']) }}</a></h3>
+              <div class="star clearfix">
+                <span class="allstar35">7.5</span><span class="pl">(47090人评价)</span>
+              </div>
+              <span class="pl">作者:</span> {{ escape(entry['author']) }}<br>
+              <span class="pl">分类:</span>{{ entry['cate_name'] }}<br>
+              <span class="pl">适应设备:</span>
+              {% if entry['mobi'] %}
+              kindel
+              {%  elif entry['epub'] %}
+              iphone ipad
+              {% end %}
+              <br>
+            </div>
+          </li>
+          {% end %}
+        </ul>
+      </div>
+            
+      <div class="clear"></div>
+      <div class="movie_new">
+        <h2 class="green_tab clearfix">
+          <div class="ll">影音 · · · · · ·<span class="pl">( <a href="/movie">more</a> ) </span></div>
+        </h2>
+        <ul class="content clearfix" id="newcontent1">
+            </ul>
+      </div>
+
+      <!--end commend-->
+    </div>
+    <!--end article-->
+    <!--begin aside-->
+    <div class="aside">
+      <!--login or ad -->
+            <table class="infobox" width="100%" style="margin-bottom:40px">
+        <tbody>
+          <tr>
+            <td class="tablelt"></td>
+            <td class="tablect"></td>
+            <td class="tablert"></td>
+          </tr>
+          <tr>
+            <td class="tablelc"></td>
+            <td class="tablecc">
+              <h2>广告 &nbsp; ·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;</h2>
+              </td>
+            <td class="tablerc"></td>
+          </tr>
+          <tr>
+            <td class="tablelb"></td>
+            <td class="tablecb"></td>
+            <td class="tablerb"></td>
+          </tr>
+        </tbody>
+      </table>
+      <!--end login-->
+      <!--user-->
+      <h2>你可能会喜欢他/她· · · · · · </h2>
+      <ul class="citysmr2 clearfix">
+                <li class="clearfix"> <a class="img" href="/user/150.html" title="宁萌"> <img class="m_sub_img" src="/static/pics/grey.gif" original="/attachment/user/150/s150.jpg"></a>
+          <div> <a class="title" href="/user/150.html" title="宁萌">宁萌</a><br>
+            <span class="pl">
+            空间—— http://47713695.qzone……<br>            收藏14首<br>                        </span> </div>
+        </li>
+                <li class="clearfix"> <a class="img" href="/user/336.html" title="MrxuL"> <img class="m_sub_img" src="/attachment/user/336/s336.jpg" original="/attachment/user/336/s336.jpg" style="display: inline; "></a>
+          <div> <a class="title" href="/user/336.html" title="MrxuL">MrxuL</a><br>
+            <span class="pl">
+            喜欢你们的原创MsSic...<br>                                    </span> </div>
+        </li>
+                <li class="clearfix"> <a class="img" href="/user/53.html" title="skey"> <img class="m_sub_img" src="/attachment/user/53/s53.jpg" original="/attachment/user/53/s53.jpg" style="display: inline; "></a>
+          <div> <a class="title" href="/user/53.html" title="skey">skey</a><br>
+            <span class="pl">
+            look in the sky<br>            收藏4首<br>                        </span> </div>
+        </li>
+                <li class="clearfix"> <a class="img" href="/user/344.html" title="尛亼物ノ"> <img class="m_sub_img" src="/attachment/user/344/s344.jpg" original="/attachment/user/344/s344.jpg" style="display: inline; "></a>
+          <div> <a class="title" href="/user/344.html" title="尛亼物ノ">尛亼物ノ</a><br>
+            <span class="pl">
+            個性怪怪ˊ﹎．脾气可愛╰`` ╯ ……<br>                                    </span> </div>
+        </li>
+                <li class="clearfix"> <a class="img" href="/user/297.html" title="藏在心底最深處"> <img class="m_sub_img" src="/attachment/user/297/s297.jpg" original="/attachment/user/297/s297.jpg" style="display: inline; "></a>
+          <div> <a class="title" href="/user/297.html" title="藏在心底最深處">藏在心底最深處</a><br>
+            <span class="pl">
+            abc 轩。<br>            收藏39首<br>                        </span> </div>
+        </li>
+                <li class="clearfix"> <a class="img" href="/user/157.html" title="吖狮"> <img class="m_sub_img" src="/attachment/user/157/s157.jpg" original="/attachment/user/157/s157.jpg" style="display: inline; "></a>
+          <div> <a class="title" href="/user/157.html" title="吖狮">吖狮</a><br>
+            <span class="pl">
+                        收藏4首<br>                        </span> </div>
+        </li>
+              </ul>
+      <!--end user-->
+      <!--groupstopic-->
+      <div class="pl">
+        <h2>热门话题· · · · · ·<span class="pl">( <a href="/groups.html">more</a> ) </span></h2>
+        <ul class="simple-dashed-list">
+                  </ul>
+      </div>
+      <!--end groupstopic-->
+    </div>
+    <!--end aside-->
+  </div>
+  <!--end grid-16-8 clearfix-->
+</div>
+<!--end content-->
+  <div class="fdiv clearfix"></div>
+{% end %}
+
+</html>
+
+</html>
