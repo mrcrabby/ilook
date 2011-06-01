@@ -1,13 +1,13 @@
 Ensoon = new Object();
-Ensoon.errdetail = ['', 'Î´Öª´íÎó', 'ÎÄ¼ş¹ı´ó', 'ĞÅÏ¢²»È«', 'ÓòÃû´íÎó', '·ÖÀà´íÎó', 'ÓÃ»§´íÎó', 'È¨ÏŞ²»×ã', 'Ã»ÓĞÎÄ¼ş', '±£´æÎÄ¼ş´íÎó', '²»Ö§³ÖµÄÎÄ¼ş¸ñÊ½', '³¬Ê±', 'ÎÄ¼ş¸ñÊ½ÓĞÎó', '', 'Ìí¼ÓÎÄ¼ş³ö´í', 'ÒÑ¾­´ïµ½ÈİÁ¿ÉÏÏŞ', '²»´æÔÚµÄÏà²á', 'É¾³ıÊ§°Ü']
-notice = ['ÕıÔÚÉ¾³ı£¬ÇëÉÔºò...', //0
-'·şÎñÆ÷Ã¦£¬É¾³ıÊ§°Ü...', //1
-'ÇëÏÈµÇÂ¼...', //2
-'ÕıÔÚÌá½»...', //3
-'·şÎñÆ÷·¢Éú´íÎó,ÇëÉÔºòÔÙÊÔ...', //4
-'ÄÚÈİ²»ÄÜ¹»Îª¿Õ...', //5
-'±êÌâ²»ÄÜÎª¿Õ', //6
-'Ã»ÓĞÈ¨ÏŞ£¬²Ù×÷Ê§°Ü...'];
+Ensoon.errdetail = ['', 'æœªçŸ¥é”™è¯¯', 'æ–‡ä»¶è¿‡å¤§', 'ä¿¡æ¯ä¸å…¨', 'åŸŸåé”™è¯¯', 'åˆ†ç±»é”™è¯¯', 'ç”¨æˆ·é”™è¯¯', 'æƒé™ä¸è¶³', 'æ²¡æœ‰æ–‡ä»¶', 'ä¿å­˜æ–‡ä»¶é”™è¯¯', 'ä¸æ”¯æŒçš„æ–‡ä»¶æ ¼å¼', 'è¶…æ—¶', 'æ–‡ä»¶æ ¼å¼æœ‰è¯¯', '', 'æ·»åŠ æ–‡ä»¶å‡ºé”™', 'å·²ç»è¾¾åˆ°å®¹é‡ä¸Šé™', 'ä¸å­˜åœ¨çš„ç›¸å†Œ', 'åˆ é™¤å¤±è´¥']
+notice = ['æ­£åœ¨åˆ é™¤ï¼Œè¯·ç¨å€™...', //0
+'æœåŠ¡å™¨å¿™ï¼Œåˆ é™¤å¤±è´¥...', //1
+'è¯·å…ˆç™»å½•...', //2
+'æ­£åœ¨æäº¤...', //3
+'æœåŠ¡å™¨å‘ç”Ÿé”™è¯¯,è¯·ç¨å€™å†è¯•...', //4
+'å†…å®¹ä¸èƒ½å¤Ÿä¸ºç©º...', //5
+'æ ‡é¢˜ä¸èƒ½ä¸ºç©º', //6
+'æ²¡æœ‰æƒé™ï¼Œæ“ä½œå¤±è´¥...'];
 var trace = function (o) {
     if (1) {
         if (window.console && window.console.info) {
@@ -124,7 +124,7 @@ Ensoon.init_evb = function (o) {
         $.post(url, function (ret) {
             var r = eval("(" + ret + ")");
             event_monitor.broadcast(this, "entry_" + eid + "_voted", r);
-            $(o).text("ÄãµÄÍ¶Æ±ÒÑ¾­Ìá½»£¬Ğ»Ğ»¡£")
+            $(o).text("ä½ çš„æŠ•ç¥¨å·²ç»æäº¤ï¼Œè°¢è°¢ã€‚")
             $("#nf-" + eid).hide();
             $("#nf_s-" + eid).hide();
         });
@@ -138,7 +138,7 @@ Ensoon.init_evc = function (o) {
     event_monitor.subscribe("entry_" + eid + "_voted", function (caller, data) {
         var count = data.rec_count;
         if (count) {
-            $(o).text("" + count + "ÈËÍÆ¼ö").removeClass("hidden");
+            $(o).text("" + count + "äººæ¨è").removeClass("hidden");
         }
     });
 }
@@ -149,7 +149,7 @@ Ensoon.init_enb = function (o) {
     $(o).submit(function () {
         var url = "/j/entry/" + eid + "/nointerest";
         $.post(url, function (ret) {
-            $(o).text("ÄãµÄÍ¶Æ±ÒÑ¾­Ìá½»£¬Ğ»Ğ»¡£");
+            $(o).text("ä½ çš„æŠ•ç¥¨å·²ç»æäº¤ï¼Œè°¢è°¢ã€‚");
             $("#a_evb-" + eid + ",#evb_s-" + eid).hide();
         });
         return false;
@@ -165,8 +165,8 @@ var voteuse_act = function (useful, id, type) {
     $.post(url, {}, function (sjson) {
         var ret = eval('(' + sjson + ')');
         if (ret.result) {
-            $('#voteuse_' + id).html('<span class="m gtleft">ÄãµÄÍ¶Æ±ÒÑ¾­Ìá½»£¬Ğ»Ğ»¡£</span>');
-            $('#userate_' + id).html('<p id="userate_%s" class="pl">' + ret.usecount + '/' + ret.totalcount + 'µÄÈË¾õµÃ´ËÆÀÂÛÓĞÓÃ:</p>');
+            $('#voteuse_' + id).html('<span class="m gtleft">ä½ çš„æŠ•ç¥¨å·²ç»æäº¤ï¼Œè°¢è°¢ã€‚</span>');
+            $('#userate_' + id).html('<p id="userate_%s" class="pl">' + ret.usecount + '/' + ret.totalcount + 'çš„äººè§‰å¾—æ­¤è¯„è®ºæœ‰ç”¨:</p>');
         }
         return false;
     });
@@ -192,7 +192,7 @@ Ensoon.init_bef = function (o) {
         f = $('.entry-full', o);
     unfolder.click(function () {
         if (f.text() == "") {
-            var loadtip = $('<div class="loadtip">ÕıÔÚÔØÈë...</div>');
+            var loadtip = $('<div class="loadtip">æ­£åœ¨è½½å…¥...</div>');
             var loadhl = setTimeout(function () {
                 $('.source', o).before(loadtip);
             }, 200);
@@ -294,10 +294,10 @@ Ensoon.init_bevf = function (o) {
         var f = $(".mv", o);
         if (f.length) {
             var d = f.toggle().css('display');
-            l.text(d == 'none' ? "¸ü¶àÍÆ¼öÕß" : "Òş²Ø");
+            l.text(d == 'none' ? "æ›´å¤šæ¨èè€…" : "éšè—");
             if (m.length) m.toggle().css('display');
         } else {
-            t = $('<li>ÕıÔÚ×°ÔØ...</li>');
+            t = $('<li>æ­£åœ¨è£…è½½...</li>');
             if (v.length) {
                 v.append(t);
             } else {
@@ -312,7 +312,7 @@ Ensoon.init_bevf = function (o) {
                     m.css('display', 'none');
                 }
             });
-            $('.link', o).text("Òş²Ø");
+            $('.link', o).text("éšè—");
         }
         return false;
     }
@@ -328,7 +328,7 @@ Ensoon.init_guidelink = function (o) {
 };
 
 Ensoon.init_closelink = function (o) {
-    $('<a href="#">¹Ø±Õ</a>').appendTo($(o)).click(function () {
+    $('<a href="#">å…³é—­</a>').appendTo($(o)).click(function () {
         window.close();
         return false;
     });
@@ -344,10 +344,10 @@ function ext_links() {
     });
 }
 /////////////////////////////////video
-// Ìí¼Óurl
+// æ·»åŠ url
 Ensoon.init_video_addurl = function (o) {
     $(o).click(function () {
-        pop_win("¼ÓÔØÖĞ,ÇëÉÔµÈ...");
+        pop_win("åŠ è½½ä¸­,è¯·ç¨ç­‰...");
         var vid = $(o).attr('name');
         var url = '/video/addurl?vid=' + vid;
 
@@ -359,11 +359,11 @@ Ensoon.init_collectsong_form = function (form) {
     form.onsubmit = function () {
         remote_submit_json(this, function (data) {
             if (data > 0) {
-                $('#dialog').html('<div class="loadpop m">ÊÕ²Ø³É¹¦£¡</div>');
+                $('#dialog').html('<div class="loadpop m">æ”¶è—æˆåŠŸï¼</div>');
                 set_overlay();
             } else {
                 if (data == "-1") {
-                    $('#dialog').html('<div class="loadpop m">ÒÑ¾­ÊÕ²Ø£¡</div>');
+                    $('#dialog').html('<div class="loadpop m">å·²ç»æ”¶è—ï¼</div>');
                     set_overlay();
                 } else {
                     $('#dialog').html('<div class="loadpop m">' + notice[6] + '</div>');
@@ -383,11 +383,11 @@ Ensoon.init_collectsong_form = function (form) {
     $(form).set_len_limit(2000);
 }
 
-//ÆÀ¼Ûsubject
+//è¯„ä»·subject
 Ensoon.init_subject_collect = function (o) {
     $(o).click(function () {
         date = new Date();
-        pop_win("¼ÓÔØÖĞ,ÇëÉÔµÈ...");
+        pop_win("åŠ è½½ä¸­,è¯·ç¨ç­‰...");
         var _ = $(this).attr('name').split('-');
         var btn_type = _[0],
             sid = _[1],
@@ -397,7 +397,7 @@ Ensoon.init_subject_collect = function (o) {
         var url = '/collect/add/?' + (sid ? 'sid=' + sid : '') + (pid ? '&pid=' + pid : '') + (rating ? '&rating=' + rating : '');
         $.getJSON(url, function (r) {
             if (r.state == 1) {
-                show_dialog('<div class="loadpop m">ÆÀ¼Û³É¹¦...</div>');
+                show_dialog('<div class="loadpop m">è¯„ä»·æˆåŠŸ...</div>');
                 set_overlay();
                 setTimeout(function () {
                     $('#dialog, #overlay').fadeOut(close_dialog);
@@ -417,7 +417,7 @@ Ensoon.init_subject_collect = function (o) {
                 pop_win.close();
             }
             if (r.state == 0) {
-                show_dialog('<div class="loadpop m">ÆÀ¼ÛÊ§°Ü...</div>');
+                show_dialog('<div class="loadpop m">è¯„ä»·å¤±è´¥...</div>');
                 set_overlay();
             } else {
                 show_dialog(r.html);
@@ -433,7 +433,7 @@ Ensoon.init_video_del_comment = function (o) {
     var _ = $(o).attr('name').split('-');
     $(o).click(function () {
         var text = o.title;
-        if (confirm("ÕæµÄÒª" + text + "?") == true) {
+        if (confirm("çœŸçš„è¦" + text + "?") == true) {
             $.getJSON("/j/video/del_comment", {
                 comment_id: _[1],
                 video_id: _[2]
@@ -461,21 +461,21 @@ Ensoon.init_song_interest = function (o) {
         if (hascss) {
             $(o).children().attr({
                 src: "/static/pics/red-heart.gif",
-                title: "È¡Ïû'ÎÒÏ²»¶'",
-                alt: "È¡Ïû'ÎÒÏ²»¶'"
+                title: "å–æ¶ˆ'æˆ‘å–œæ¬¢'",
+                alt: "å–æ¶ˆ'æˆ‘å–œæ¬¢'"
             });
 
         } else {
 
             $(o).children().attr({
                 src: "/static/pics/gray-heart.gif",
-                title: "ÎÒÏ²»¶",
-                alt: "ÎÒÏ²»¶"
+                title: "æˆ‘å–œæ¬¢",
+                alt: "æˆ‘å–œæ¬¢"
             });
         }
     });
     var f = function () {
-        pop_win("¼ÓÔØÖĞ,ÇëÉÔµÈ...");
+        pop_win("åŠ è½½ä¸­,è¯·ç¨ç­‰...");
         uid = ((_[1] == 'I') && (_[2] == undefined)) ? $('input', $(o).parent())[0].value : _[2];
         rec = (_[3] == undefined) ? '' : _[3]
         var fcs = function (type) {
@@ -523,7 +523,7 @@ Ensoon.init_list_add = function (o) {
     var pid = _[2];
     var title = _[3];
     var f = function () {
-        pop_win("¼ÓÔØÖĞ,ÇëÉÔµÈ...");
+        pop_win("åŠ è½½ä¸­,è¯·ç¨ç­‰...");
         uid = ((_[1] == 'I') && (_[2] == undefined)) ? $('input', $(o).parent())[0].value : _[2];
         rec = (_[3] == undefined) ? '' : _[3]
         var fcs = function (type) {
@@ -612,10 +612,10 @@ Ensoon.init_follow_btn = function (o) {
             uid = _[1],
             follow = _[2];
         if (follow == 1) {
-            show_dialog('<div class="loadpop m">ÕıÔÚÌá½»...</div>');
+            show_dialog('<div class="loadpop m">æ­£åœ¨æäº¤...</div>');
             set_overlay();
         } else {
-            show_dialog('<div class="loadpop m">ÕıÔÚÉ¾³ı...</div>');
+            show_dialog('<div class="loadpop m">æ­£åœ¨åˆ é™¤...</div>');
             set_overlay();
         }
         $(o).toggleClass("interest");
@@ -623,16 +623,16 @@ Ensoon.init_follow_btn = function (o) {
         if (hascss) {
             $(o).children().attr({
                 src: "",
-                title: "È¡Ïû¹Ø×¢'",
-                alt: "È¡Ïû¹Ø×¢"
+                title: "å–æ¶ˆå…³æ³¨'",
+                alt: "å–æ¶ˆå…³æ³¨"
             });
 
         } else {
 
             $(o).children().attr({
                 src: "/pics/add_contact1.gif",
-                title: "¹Ø×¢´ËÈË",
-                alt: "¹Ø×¢´ËÈË"
+                title: "å…³æ³¨æ­¤äºº",
+                alt: "å…³æ³¨æ­¤äºº"
             });
         }
         var url = '/follows/add?' + (uid ? 'uid=' + uid : '');
@@ -649,7 +649,7 @@ Ensoon.init_friend_agree = function (o) {
         var _ = $(this).attr('name').split('-');
         var uid = _[1],
             touid = _[2];
-        show_dialog('<div class="loadpop m">ÕıÔÚÌá½»...</div>');
+        show_dialog('<div class="loadpop m">æ­£åœ¨æäº¤...</div>');
         set_overlay();
         var url = '/friends/agree?' + (uid ? 'uid=' + uid : '') + (touid ? '&touid=' + touid : '');
         $.getJSON(url, function (r) {
@@ -664,7 +664,7 @@ Ensoon.init_friend_disagree = function (o) {
         var _ = $(this).attr('name').split('-');
         var uid = _[1],
             touid = _[2];
-        show_dialog('<div class="loadpop m">ÕıÔÚÌá½»...</div>');
+        show_dialog('<div class="loadpop m">æ­£åœ¨æäº¤...</div>');
         set_overlay();
         var url = '/friends/disagree?' + (uid ? 'uid=' + uid : '') + (touid ? '&touid=' + touid : '');
         $.getJSON(url, function (r) {
@@ -717,13 +717,13 @@ Ensoon.init_confirm_link = function (o) {
         //alert(o.name);
         $(o).click(function () {
             var text = o.title || $(o).text();
-            return confirm("ÕæµÄ" + text + "?");
+            return confirm("çœŸçš„" + text + "?");
         });
     } else {
         var _ = o.name.split('-');
         var url = '/commend/delsong';
         $(o).click(function () {
-            var bln = confirm("ÕæµÄÒªÉ¾³ı?");
+            var bln = confirm("çœŸçš„è¦åˆ é™¤?");
             if (bln) {
                 //alert(_[2]);
                 $.getJSON(url, {
@@ -771,7 +771,7 @@ Ensoon.init_interest_form = function (form) {
             }
         });
         $('input', '#submits').hide();
-        $('td', '#submits').append('<span class="m">ÕıÔÚ±£´æ...</span>');
+        $('td', '#submits').append('<span class="m">æ­£åœ¨ä¿å­˜...</span>');
         return false;
     });
     $(form.cancel).click(function () {
@@ -782,11 +782,11 @@ Ensoon.init_interest_form = function (form) {
 
 Ensoon.init_stars = function (o) {
     var ratewords = {
-        1: 'ºÜ²î',
-        2: '½Ï²î',
-        3: '»¹ĞĞ',
-        4: 'ÍÆ¼ö',
-        5: 'Á¦Í¦'
+        1: 'å¾ˆå·®',
+        2: 'è¾ƒå·®',
+        3: 'è¿˜è¡Œ',
+        4: 'æ¨è',
+        5: 'åŠ›æŒº'
     };
     var lighten_stars = function (i) {
         var rating = $(':hidden', o).attr('value') || 0;
@@ -1173,7 +1173,7 @@ var show_dialog = function (c, title,b) {
 		}
         $("#dialog").html(c)
     } else {
-        $("#dialog").html('<a onclick="close_dialog()" href="javascript:;" class="pop_win_close">X</a>'+"<div class='loadpop'>ÕıÔÚÔØÈë£¬ÇëÉÔºò...</div>")
+        $("#dialog").html('<a onclick="close_dialog()" href="javascript:;" class="pop_win_close">X</a>'+"<div class='loadpop'>æ­£åœ¨è½½å…¥ï¼Œè¯·ç¨å€™...</div>")
     }
 
     if ($("#dialog").width() < 300) {
@@ -1246,10 +1246,10 @@ Ensoon.init_collect_btn = function (o) {
             interest = _[2],
             rating = _[3];
         if (rating > 0) {
-            show_dialog('<div class="loadpop m">ÕıÔÚÌá½»...</div>');
+            show_dialog('<div class="loadpop m">æ­£åœ¨æäº¤...</div>');
             set_overlay();
         } else {
-            show_dialog('<div class="loadpop m">ÕıÔÚÉ¾³ı...</div>');
+            show_dialog('<div class="loadpop m">æ­£åœ¨åˆ é™¤...</div>');
             set_overlay();
         }
         var url = 'songdo.php?do=12&' + (sid ? 'sid=' + sid : '') + (rating ? '&rating=' + rating : '');
@@ -1261,11 +1261,11 @@ Ensoon.init_collect_btn = function (o) {
         return false;
     });
 }
-//ÆÀ¼Û×¨¼­
+//è¯„ä»·ä¸“è¾‘
 Ensoon.init_album_rec = function (o) {
     $(o).click(function () {
         date = new Date();
-        pop_win("¼ÓÔØÖĞ,ÇëÉÔµÈ...");
+        pop_win("åŠ è½½ä¸­,è¯·ç¨ç­‰...");
         var _ = $(this).attr('name').split('-');
         var btn_type = _[0],
             albumid = _[1],
@@ -1273,7 +1273,7 @@ Ensoon.init_album_rec = function (o) {
         var url = '/album/rating/?' + (albumid ? 'id=' + albumid : '') + (rating ? '&rating=' + rating : '');
         $.getJSON(url, function (r) {
             if (r.state == 1) {
-                show_dialog('<div class="loadpop">ÆÀ¼Û³É¹¦...</div>');
+                show_dialog('<div class="loadpop">è¯„ä»·æˆåŠŸ...</div>');
                 set_overlay();
                 setTimeout(function () {
                     $('#dialog, #overlay').fadeOut(close_dialog);
@@ -1292,7 +1292,7 @@ Ensoon.init_album_rec = function (o) {
                 pop_win.close();
             }
             if (r.state == 0) {
-                show_dialog('<div class="loadpop">ÆÀ¼ÛÊ§°Ü...</div>');
+                show_dialog('<div class="loadpop">è¯„ä»·å¤±è´¥...</div>');
                 set_overlay();
             } else {
                 show_dialog(r.html);
@@ -1303,7 +1303,7 @@ Ensoon.init_album_rec = function (o) {
         return false;
     });
 }
-//ÊÕ²Ø×¨¼­
+//æ”¶è—ä¸“è¾‘
 Ensoon.init_albumcollect_btn = function (o) {
     $(o).click(function () {
         date = new Date();
@@ -1312,10 +1312,10 @@ Ensoon.init_albumcollect_btn = function (o) {
             Do = _[1];
 
         if (Do == 111) {
-            show_dialog('<div class="loadpop m">ÕıÔÚÌá½»...</div>');
+            show_dialog('<div class="loadpop m">æ­£åœ¨æäº¤...</div>');
             set_overlay();
         } else {
-            show_dialog('<div class="loadpop m">ÕıÔÚÉ¾³ı...</div>');
+            show_dialog('<div class="loadpop m">æ­£åœ¨åˆ é™¤...</div>');
             set_overlay();
         }
         var url = 'albumdo.php?' + (id ? 'albumid=' + id : '') + (Do ? '&do=' + Do : '');
@@ -1328,19 +1328,19 @@ Ensoon.init_albumcollect_btn = function (o) {
         return false;
     });
 }
-//×¨¼­É¾³ıÒôÀÖ
+//ä¸“è¾‘åˆ é™¤éŸ³ä¹
 Ensoon.init_albumdelsong_link = function (o) {
     if (!o.name) {
         //alert(o.name);
         $(o).click(function () {
             var text = o.title || $(o).text();
-            return confirm("ÕæµÄ" + text + "?");
+            return confirm("çœŸçš„" + text + "?");
         });
     } else {
         var _ = o.name.split('-');
         var url = '/album/delsong';
         $(o).click(function () {
-            var bln = confirm("ÕæµÄÒªÉ¾³ı?");
+            var bln = confirm("çœŸçš„è¦åˆ é™¤?");
             if (bln) {
                 //alert(_[2]);
                 $.getJSON(url, {
@@ -1364,11 +1364,11 @@ Ensoon.init_albumdelsong_link = function (o) {
         })
     }
 }
-//ÆÀ¼ÛÒôÀÖ
+//è¯„ä»·éŸ³ä¹
 Ensoon.init_song_rec = function (o) {
     $(o).click(function () {
         date = new Date();
-        pop_win("¼ÓÔØÖĞ,ÇëÉÔµÈ...");
+        pop_win("åŠ è½½ä¸­,è¯·ç¨ç­‰...");
         var _ = $(this).attr('name').split('-');
         var btn_type = _[0],
             songid = _[1],
@@ -1376,7 +1376,7 @@ Ensoon.init_song_rec = function (o) {
         var url = '/rec/songrating/?' + (songid ? 'id=' + songid : '') + (rating ? '&rating=' + rating : '');
         $.getJSON(url, function (r) {
             if (r.state == 1) {
-                show_dialog('<div class="loadpop m">ÆÀ¼Û³É¹¦...</div>');
+                show_dialog('<div class="loadpop m">è¯„ä»·æˆåŠŸ...</div>');
                 set_overlay();
                 setTimeout(function () {
                     $('#dialog, #overlay').fadeOut(close_dialog);
@@ -1395,7 +1395,7 @@ Ensoon.init_song_rec = function (o) {
                 pop_win.close();
             }
             if (r.state == 0) {
-                show_dialog('<div class="loadpop m">ÆÀ¼ÛÊ§°Ü...</div>');
+                show_dialog('<div class="loadpop m">è¯„ä»·å¤±è´¥...</div>');
                 set_overlay();
             } else {
                 show_dialog(r.html);
@@ -1411,11 +1411,11 @@ Ensoon.init_listaddsubject_form = function (form) {
     form.onsubmit = function () {
         remote_submit_json(this, function (data) {
             if (data > 0) {
-                $('#dialog').html('<div class="loadpop m">Ìí¼Ó³É¹¦£¡</div>');
+                $('#dialog').html('<div class="loadpop m">æ·»åŠ æˆåŠŸï¼</div>');
                 set_overlay();
             } else {
                 if (data == "-1") {
-                    $('#dialog').html('<div class="loadpop m">ÒÑ¾­Ìí¼Ó£¡</div>');
+                    $('#dialog').html('<div class="loadpop m">å·²ç»æ·»åŠ ï¼</div>');
                     set_overlay();
                 } else {
                     $('#dialog').html('<div class="loadpop m">' + notice[4] + '</div>');
@@ -1444,10 +1444,10 @@ Ensoon.init_listcollect_btn = function (o) {
             Do = _[1];
 
         if (Do == 111) {
-            show_dialog('<div class="loadpop m">ÕıÔÚÌá½»...</div>');
+            show_dialog('<div class="loadpop m">æ­£åœ¨æäº¤...</div>');
             set_overlay();
         } else {
-            show_dialog('<div class="loadpop m">ÕıÔÚÉ¾³ı...</div>');
+            show_dialog('<div class="loadpop m">æ­£åœ¨åˆ é™¤...</div>');
             set_overlay();
         }
         var url = 'listdo.php?' + (id ? 'listid=' + id : '') + (Do ? '&do=' + Do : '');
@@ -1479,8 +1479,8 @@ Ensoon.init_nine_collect_btn = function (o) {
             $.each(tags, function (i, tag) {
                 hash[tag.toLowerCase()] = true;
             });
-            populate_tag_btns('ÎÒµÄ±êÇ©(µã»÷Ìí¼Ó):', $('#mytags', html), r.my_tags, hash);
-            populate_tag_btns("Ensoon³ÉÔ±³£ÓÃµÄ±êÇ©(µã»÷Ìí¼Ó):", $('#populartags', html), r.popular_tags, hash);
+            populate_tag_btns('æˆ‘çš„æ ‡ç­¾(ç‚¹å‡»æ·»åŠ ):', $('#mytags', html), r.my_tags, hash);
+            populate_tag_btns("Ensoonæˆå‘˜å¸¸ç”¨çš„æ ‡ç­¾(ç‚¹å‡»æ·»åŠ ):", $('#populartags', html), r.popular_tags, hash);
             if (btn_type == 'pbtn') $('form', html).append('<div id="src_pbtn"></div>');
             $("#collect_form_" + sid).html("").append('<p class="ul"></p>').append(html);
             load_event_monitor($("#collect_form_" + sid));
@@ -1536,7 +1536,7 @@ Ensoon.init_rec_btn = function (o) {
 Ensoon.init_rec_form = function (form) {
     form.onsubmit = function () {
         remote_submit_json(this, function (data) {
-            $('#dialog').html('<div class="loadpop m">Ìá½»³É¹¦</div>');
+            $('#dialog').html('<div class="loadpop m">æäº¤æˆåŠŸ</div>');
             set_overlay();
             $('#rec_url_text').attr('value', 'http://');
             setTimeout(function () {
@@ -1620,7 +1620,7 @@ Ensoon.init_rec_reply = function (o) {
             }, function (r) {
                 $('<div class="recreplylst"></div>').insertAfter($(o).parent().parent()).html(r.html);
                 load_event_monitor($(o).parent().parent().next());
-                $(o).attr('rev', $(o).html()).text('Òş²Ø»ØÓ¦');
+                $(o).attr('rev', $(o).html()).text('éšè—å›åº”');
                 o.rel = ""
             })
         }
@@ -1637,9 +1637,9 @@ Ensoon.init_reply_form = function (form) {
             $(replst).html(r.html);
             load_event_monitor(replst);
             if (n == 'n') {
-                var a = $('<span><a href="javascript:void(0)">Ìí¼Ó»ØÓ¦</a></span>');
+                var a = $('<span><a href="javascript:void(0)">æ·»åŠ å›åº”</a></span>');
             } else {
-                var a = $('<span style="margin-left:53px"><a href="javascript:void(0)">Ìí¼Ó»ØÓ¦</a></span>');
+                var a = $('<span style="margin-left:53px"><a href="javascript:void(0)">æ·»åŠ å›åº”</a></span>');
             }
             $('form', replst).hide().after(a);
             a.click(function () {
@@ -1698,9 +1698,9 @@ Ensoon.init_editable = function (o) {
         if (t != undefined) {
             disp.text(t);
             if (disp.text() == '') {
-                a.text('µã»÷Ìí¼ÓÃèÊö').addClass('album_photo');
+                a.text('ç‚¹å‡»æ·»åŠ æè¿°').addClass('album_photo');
             } else {
-                a.text('ĞŞ¸Ä').removeClass('album_photo');
+                a.text('ä¿®æ”¹').removeClass('album_photo');
             }
         }
         disp.show();
@@ -1713,7 +1713,7 @@ Ensoon.init_editable = function (o) {
         remote_submit_json(form, function (r) {
             show(r.desc);
         })
-        $('textarea', form)[0].value = "ÕıÔÚ±£´æ...";
+        $('textarea', form)[0].value = "æ­£åœ¨ä¿å­˜...";
         return false;
     })
     $('.cancel', form).click(function () {
@@ -1736,7 +1736,7 @@ Ensoon.init_show_video = function (o) {
     $('div', o).append(overlay);
     var fhtml = $('img', o).attr('name');
     $(o).click(function () {
-        var closebtn = $('<a href="javascript:void(0)">Ëõ½ø</a>');
+        var closebtn = $('<a href="javascript:void(0)">ç¼©è¿›</a>');
         if (eid != undefined) $.get("/j/recommend?from=" + eid);
         closebtn.click(function () {
             $(o).show();
@@ -1772,7 +1772,7 @@ Ensoon.init_search_result = function (o) {
 
 Ensoon.init_prompt_link = function (o) {
     $(o).click(function () {
-        var val = prompt(o.title || 'ÇëÊäÈë');
+        var val = prompt(o.title || 'è¯·è¾“å…¥');
         if (val) {
             location.href = o.href + (o.href.indexOf('?') == -1 ? '?' : '&') + o.name + '=' + encodeURIComponent(val);
         }
@@ -1815,7 +1815,7 @@ jQuery.fn.extend({
         var oldv = s.attr('value');
         var check = function () {
             if (this.value && this.value.length > limit) {
-                s.attr('disabled', 1).attr('value', '×ÖÊı²»ÄÜ³¬¹ı' + limit + '×Ö');
+                s.attr('disabled', 1).attr('value', 'å­—æ•°ä¸èƒ½è¶…è¿‡' + limit + 'å­—');
             } else {
                 s.attr('disabled', 0).attr('value', oldv);
             }
@@ -2015,9 +2015,9 @@ function pop_win(htm) {
     var b = __pop_win.body,
         body_j = __pop_win.body_j,
         dom = js_parser(htm);
-    if (htm == '¼ÓÔØÖĞ,ÇëÉÔµÈ...') {
+    if (htm == 'åŠ è½½ä¸­,è¯·ç¨ç­‰...') {
 
-        b.innerHTML = '<div style="visibility: visible; top: 68px; left: 320px; width: 350px;"><span class="gact rr"><a onClick="pop_win.close()" href="javascript:;" class="pop_win_close">X</a></span><div class="rectitle" style="background-color: #EBF5EB;"><h2>¼ÓÔØ  ¡¤ ¡¤ ¡¤ ¡¤ ¡¤ ¡¤</h2></div><div align="center"><img src="http://img.ensoon.com/pics/spinner.gif"/> ¼ÓÔØÖĞ,ÇëÉÔµÈ...</div></div>';
+        b.innerHTML = '<div style="visibility: visible; top: 68px; left: 320px; width: 350px;"><span class="gact rr"><a onClick="pop_win.close()" href="javascript:;" class="pop_win_close">X</a></span><div class="rectitle" style="background-color: #EBF5EB;"><h2>åŠ è½½  Â· Â· Â· Â· Â· Â·</h2></div><div align="center"><img src="http://img.ensoon.com/pics/spinner.gif"/> åŠ è½½ä¸­,è¯·ç¨ç­‰...</div></div>';
     } else {
         b.innerHTML = '<a onclick="pop_win.close()" href="javascript:;" class="pop_win_close">X</a>' + dom.htm;
     }
@@ -2047,7 +2047,7 @@ pop_win.close = function () {
 }
 
 pop_win.load = function (url, cache) {
-    pop_win("¼ÓÔØÖĞ,ÇëÉÔµÈ...");
+    pop_win("åŠ è½½ä¸­,è¯·ç¨ç­‰...");
     $.ajax({
         url: url,
         success: pop_win,
@@ -2062,22 +2062,22 @@ function RunTime(RateDT) { //RateDT=new Date(RateDT);
     // alert(BTarray[0]);
     Now = new Date();
     DiffYear = (Now.getFullYear() - BTarray[0]);
-    if (DiffYear) return DiffTime = DiffYear + "Äê";
+    if (DiffYear) return DiffTime = DiffYear + "å¹´";
     else {
         DiffMonth = (Now.getMonth() + 1 - BTarray[1]);
-        if (DiffMonth) return DiffTime = DiffMonth + "ÔÂ";
+        if (DiffMonth) return DiffTime = DiffMonth + "æœˆ";
         else {
             DiffDay = (Now.getDay() - BTarray[2]);
-            if (DiffDay) return DiffTime = DiffDay + "Ìì";
+            if (DiffDay) return DiffTime = DiffDay + "å¤©";
             else {
                 DiffHour = (Now.getHours() + 8 - BTarray[3]);
-                if (DiffHour) return DiffTime = DiffHour + "Ğ¡Ê±";
+                if (DiffHour) return DiffTime = DiffHour + "å°æ—¶";
                 else {
                     DiffMinute = (Now.getMinutes() - BTarray[4]);
-                    if (DiffMinute) return DiffTime = DiffMinute + "·Ö";
+                    if (DiffMinute) return DiffTime = DiffMinute + "åˆ†";
                     else {
                         DiffSeconds = (Now.getSeconds() - BTarray[5]);
-                        return DiffTime = DiffSeconds + "Ãë";
+                        return DiffTime = DiffSeconds + "ç§’";
                     }
                 }
             }
@@ -2085,7 +2085,7 @@ function RunTime(RateDT) { //RateDT=new Date(RateDT);
     }
 }
 function show(url,title) {
-    pop_win("¼ÓÔØÖĞ,ÇëÉÔµÈ...");
+    pop_win("åŠ è½½ä¸­,è¯·ç¨ç­‰...");
     $.get(url, {}, function (r) {
         pop_win.close();
         show_dialog(r,title,true);

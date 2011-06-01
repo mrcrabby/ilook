@@ -25,10 +25,10 @@ jQuery(document).ready(function($){
         <tbody>
           <tr>
           <td width="100" valign="top">
-            <a class="nbg" href="subject/{{ entry['_id'] }}" title="{{ escape(entry['bookname']) }}">
+            <a class="nbg" href="/viewbook/{{ entry['_id'] }}" title="{{ escape(entry['bookname']) }}">
           <img src="/data/{{ entry['cover'] }}" height="96" alt="{{ escape(entry['bookname']) }}"></a> </td>
           <td valign="top">
-            <div class="pl2"><a href="/subject/{{ entry['_id'] }}">{{ escape(entry['bookname']) }}</a></div>
+            <div class="pl2"><a href="/viewbook/{{ entry['_id'] }}">{{ escape(entry['bookname']) }}</a></div>
 		        <span> <span class="pl">作者:</span>{{ escape(entry['author']) }}</span><br>
 			      <span> <span class="pl">分类:</span>{{ entry['cate_name'] }}</span><br>
 			      <span> <span class="pl">适应设备:</span>

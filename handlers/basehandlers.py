@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 import os
 import urlparse
+import httplib
 
 import tornado.web
 
@@ -17,6 +18,31 @@ class BaseHandler(tornado.web.RequestHandler):
         user_id = self.get_secure_cookie("user")
         if not user_id: return None
         return self.db.get("SELECT * FROM authors WHERE id = %s", int(user_id))
+    
+    def get_error_html(self, status_code, **kwargs):
+        """custom error pages.
+
+        If this error was caused by an uncaught exception, the
+        exception object can be found in kwargs e.g. kwargs['exception']
+        """
+        return  self.render_string("error.html",
+                    error="%(code)d error, %(message)s" % {
+                        "code": status_code,
+                        "message": httplib.responses[status_code],
+                    },
+                )
+    
+    def render_string(self, template_name, **kwargs):
+            
+        try:
+            category = category
+        except:
+            category = None
+
+        args = dict()
+        args.update(kwargs)
+
+        return super(BaseHandler, self).render_string(template_name, **args)
     
     def is_url(self, text):
         """docstring for is_url"""

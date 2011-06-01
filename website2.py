@@ -47,6 +47,7 @@ class Application(tornado.web.Application):
         urls = [
             (r"/", HomeHandler),
             (r"/book/?([0-9]+)?/?([0-9]+)?",BookHandler),
+            (r"/viewbook/([a-z0-9]+)",ViewbookHandler),
             (r"/crawl/([a-z0-9]+)", BookcrawHandler),
             (r"/crawl/([a-z0-9]+).(epub|mobi)", DownHandler),
         ]

@@ -39,11 +39,11 @@ jQuery(document).ready(function($){
           {% for entry in entries %}
           <li class="clearfix">
             <div class="img">
-              <a onclick="" href="/subject/1.html">
+              <a onclick="" href="/viewbook/{{ entry['_id'] }}">
                 <img src="data/{{ escape(entry['cover']) }}" original="data/{{ escape(entry['cover']) }}" style="display: inline;height:96px; "></a>
             </div>
             <div class="intro">
-              <h3><a href="/subject/1.html">{{ escape(entry['bookname']) }}</a></h3>
+              <h3><a href="/viewbook/{{ entry['_id'] }}">{{ escape(entry['bookname']) }}</a></h3>
               <div class="star clearfix">
                 <span class="allstar35">7.5</span><span class="pl">(47090人评价)</span>
               </div>
