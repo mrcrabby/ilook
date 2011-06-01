@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+import os
+import sys
+import math
 
 import tornado.web
 
@@ -7,53 +10,11 @@ from crawler import Book
 from rules import *
 
 import celerytasks
+sys.path.append(os.path.dirname(__file__))
 
-class BaseHandler(tornado.web.RequestHandler):
-    @property
-    def db(self):
-        return self.application.db
+from homehandlers import *
+from bookhandlers import *
 
-    def get_current_user(self):
-        user_id = self.get_secure_cookie("user")
-        if not user_id: return None
-        return self.db.get("SELECT * FROM authors WHERE id = %s", int(user_id))
-    
-    def is_url(self, text):
-        """docstring for is_url"""
-        return text.partition("://")[0] in ('http', 'https')
-    
-    def in_rules(self, url):
-        """docstring for in_rules"""
-        
-        url = urlparse.urlparse(url)
-        
-        return url.hostname in Rules
-        
-    def url_validate(self, url):
-        """docstring for validate"""
-        url_parsed = urlparse.urlparse(url)
-        rule = Rules[url_parsed.hostname]
-        
-        if 'url_validate' in rule and not re.match(rule['url_validate'], url):
-            return False
-        else:
-            return True
-        
-class HomeHandler(BaseHandler):
-    def get(self):
-        #entries=''
-        #entries=self.db.book.find().sort({'good':1}).limit(20)
-        entries=self.db.book.find().limit(20)
-        self.render("index.html", entries=entries)
-        #pass
-
-class BookHandler(BaseHandler):
-    def get(self,page=1,type=None):
-        if page is not None:
-            page=int(page)
-        if(page<1): page=1
-        entries=self.db.book.find().limit(20).skip((page-1)*20)
-        self.render("booklist.html", entries=entries)
 
 class CrawHandler(BaseHandler):
     """docstring for HomeHandler"""

@@ -116,7 +116,7 @@ body { margin-top:0; }
 .nav-srh form { padding:0 1px 0 0;height:38px;*float:left;background:url(../../pics/nav/ui_ns_sbg4.png) no-repeat 100% 0; } 
 .nav-srh input { float:left;width:300px;height:26px;line-height:26px;border:1px solid #a6d098;background:#fff;padding:0 2px; } 
 .nav-srh .inp { padding-top:5px;width:366px; } 
-.nav-srh .bn-srh { width:54px;height:29px;font-size:13px;padding:1px 0 3px 3px;border:none;background:transparent url(../../pics/nav/ui_ns_sbg4.png) no-repeat 0 -100px;cursor:pointer;letter-spacing:3px;text-align:center; }
+.nav-srh .bn-srh { width:54px;height:29px;font-size:13px;padding:1px 0 3px 3px;border:none;background:transparent url(./pics/ui_ns_sbg4.png) no-repeat 0 -100px;cursor:pointer;letter-spacing:3px;text-align:center; }
 .nav-srh .bn-srh { padding:2px 0 0 0\9; } 
 
 .pro-nav .nav-srh { float:left; }
