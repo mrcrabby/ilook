@@ -1,0 +1,20 @@
+<div class="top-nav">
+  <div class="bd">
+    <div class="top-nav-info">
+		{% if uid is None %}
+        <a href="/login">登录</a> <a href="/sigup">注册</a>
+		{% elif %}
+		欢迎你：{{ username }} <a href="/logout">退出</a>
+		{% end %}
+    </div>
+    <div class="top-nav-items">
+      <ul>
+		<li class="on"> <a href="/">首页 Home </a> </li>
+		<li> <a href="/book">读书 Read </a> </li>
+		<!--<li> <a href="/movie">音影 Movie </a> </li> -->
+		<li> <a href="/upload">上传 Upload</a> </li>
+		<li> <a href="/bbs">论坛 Forums </a> </li>
+	  </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block head %}
+   <style type="text/css">
+a { color: #336699 }
+em { font-style: normal }
+form { position: relative; left: 0; top: 0 }
+.item { margin: 15px 0 }
+.item-error { margin-top: 10px }
+.error { margin: 0; color: #fe2617 }
+label { display: inline-block; float:left; margin-right: 15px; text-align: right; width: 60px; font-size: 14px; line-height: 30px; vertical-align: baseline }
+label.remember { cursor: pointer; font-size: 12px; display: inline; width: auto; text-align: left; float: none; margin: 0; color: #666 }
+.basic-input { width: 200px; padding: 5px; height: 18px; font-size: 14px; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; border: 1px solid #c9c9c9 }
+.basic-input:focus { border: 1px solid #a9a9a9 }
+.validate-option { display: none; color: #666666 }
+.validate-error { display: none; color: #fe2617; line-height: 15px }
+.extra-tips .validate-error , .extra-tips .validate-option { padding-left: 10px; background: url(/static/pics/icon/tips_arrow.gif) no-repeat}
+.extra-tips .validate-error { background-position: left -51px }
+.extra-tips .validate-option { background-position: left 5px }
+.btn-submit { cursor: pointer; color: #ffffff; background: #3fa156; border: 1px solid #528641; font-size: 14px; font-weight: bold; padding: 6px 26px; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; *width: 100px }
+</style>
+<script type="text/javascript" src="/static/packed_do.js"></script>
+<script type="text/javascript">
+Do.add('validate', {path: '/static/packed_validate.js', type: 'js'});
+</script>
+{% end %}
+
+{% block body %}
+<div id="content">
+  <div class="grid-16-8 clearfix">
+    <div class="article">
+      <h1>登陆</h1>
+      {% if error %}
+      <div style="color:red"> 用户名或者密码错误 </div>
+      {% end %}
+      <form id="lzform" name="lzform" method="post" action="">
+        {{ xsrf_form_html() }}
+        <div class="item extra-tips has-error">
+          <label>Email</label>
+          <input type="hidden" id="next" value="/" maxlength="60" size="24" name="url">
+          <input type="text" id="email" name="email" class="basic-input" maxlength="60" value="" tabindex="1">
+        </div>
+        <div class="item extra-tips has-error">
+          <label>密码</label>
+          <input type="password" id="password" name="password" class="basic-input" maxlength="20" tabindex="2">
+        </div>
+       
+          <div class="item">
+          <label>&nbsp;</label>
+          <input type="submit" value="登 &nbsp;录" class="bn-submit" style="width: 6em;" id="login" name="login" tabindex="4">
+        </div>
+      </form>
+      <script type="text/javascript">
+Do('validate',function(){
+
+    var passwd_reg = /^[\u4e00-\u9fa5]/;
+    var optionMsg = {
+        email: '请输入你的email地址',
+        password: '请输入的注册密码'
+    },
+    validateError = {
+        email: {
+            isNull: 'Email不能为空',
+            invalidFormat: 'Email格式不正确'
+        },
+        password: {
+            isNull: '密码不能为空'
+        },
+        captcha: {
+            isNull: '验证码不能为空'
+        }
+    },
+    validateRules = {
+        email: {
+            elems: 'input[name=email]',
+            isNull: function(el) {
+                return !$.trim(el.val());
+            },
+            invalidFormat: function(el) {
+                  return !$.validate.isEmail($.trim(el.val()));
+            }
+        },
+        password: {
+            elems: 'input[name=password]',
+            isNull: function(el) {
+                if ( el.val() === '' ) return true;
+            },
+            invalidFormat: function(el) {
+                var s = $.trim(el.val());
+                return passwd_reg.test(s);
+            }
+        }
+    };
+    $('form').validateForm(validateRules, validateError, optionMsg, null);
+});
+</script>
+    </div>
+    <div class="aside">
+      <p class="pl">&gt; <a href="/sigup" rel="nofollow">我还没有注册</a></p>
+    </div>
+  </div>
+</div>
+  <div class="fdiv clearfix"></div>
+{% end %}
+
+</html>
+

@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script type="text/javascript">
+jQuery(document).ready(function($){
+  if (navigator.platform == "iPad") return;
+  jQuery(".img img").lazyload({
+    effect:"fadeIn",
+    placeholder: "/static/pics/grey.gif"
+  });
+});
+</script>
+{% end %}
+
+{% block body %}
+  <div id="content">
+<div class="grid-16-8 clearfix">
+  <div class="article">
+    <!--index-->
+    <!--indent-->
+    <div class="indent">
+      <div class="subjectwrap clearfix">
+        <div class="subject clearfix">
+          <div id="mainpic"><img src="/data/{{ entry['cover'] }}" alt="{{ entry['bookname'] }}"><br>
+          </div>
+          <div id="info">
+
+            <h2>{{ entry['bookname'] }}</h2><br>
+            <span> <span class="pl">{{ _('作者') }}</span>:{{ entry['author'] }}</span><br>
+            <span> <span class="pl">制作人</span>:{{ entry['username'] }}            </span><br>
+            <span> <span class="pl">上传日期</span>:
+            {{ locale.format_date(entry['date'], full_format=True, shorter=True) }}
+            </span><br>
+            <span> <span class="pl">适用设备</span>:
+                  {% if entry['mobi'] %}
+                  kindel
+                  {%  elif entry['epub'] %}
+                  iphone ipad kindle
+                  {% end %}
+            </span><br>
+            <span> <span class="pl">下载地址</span>:
+            {% if entry['mobi'] %}
+            <a href="/{{ entry['mobi'] }}">mobi</a>
+            {% elif entry['epub'] %}
+            <a href="/{{ entry['epub'] }}">epub</a>
+            {% end %}
+            </span><br/>
+            <span>购买正版 支持作者</span>
+
+          </div>
+        </div>
+        <div id="interest_sectl">
+          <div class="rating_wrap clearbox">
+            <p class="rating_self clearfix"> <span id="starsshow" class="ll bigstar35"></span> <strong id="starsnum" class="ll rating_num">7.5</strong> </p>
+            <p class="rating_self font_normal">(<span id="comnum">47090</span> 人评价)</p>
+          </div>
+        </div>
+      </div>
+      <!--rating-->
+      <div id="interest_sect_level" class="clearfix">
+        <div class="ll j a_stars">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评分 <span id="rating"> <span id="stars"> <a name="subject-1-1-1-加勒比海盗4：惊涛怪浪" href="javascript:void(0)" class="j a_subject_collect"> <img src="http://www.ensoon.com/static/pics/nst.gif" id="star1"></a> <a name="subject-1-1-2-加勒比海盗4：惊涛怪浪" href="javascript:void(0)" class="j a_subject_collect"><img src="http://www.ensoon.com/static/pics/nst.gif" id="star2"></a><a name="subject-1-1-3-加勒比海盗4：惊涛怪浪" href="javascript:void(0)" class="j a_subject_collect"><img src="http://www.ensoon.com/static/pics/nst.gif" id="star3"></a><a name="subject-1-1-4-加勒比海盗4：惊涛怪浪" href="javascript:void(0)" class="j a_subject_collect"><img src="http://www.ensoon.com/static/pics/nst.gif" id="star4"></a><a name="subject-1-1-5-加勒比海盗4：惊涛怪浪" href="javascript:void(0)" class="j a_subject_collect"><img src="http://www.ensoon.com/static/pics/nst.gif" id="star5"></a></span><span id="rateword" class="pl"></span> </span> </div>
+        <div style="float:right">
+          <ul class="ul_subject_menu bicelink color_gray pt6 clearfix">
+            <li><img src="/static/pics/addlist.gif">&nbsp;<a class="j a_list_add" name="list-1-1-加勒比海盗4：惊涛怪浪" href="#" rel="nofollow">加入列</a></li>
+          </ul>
+        </div>
+      </div>
+      <!--end rating-->
+    </div>
+    <!--end indent-->
+    <!--content-->
+    <div class="related_info">
+      <h2>简介 &nbsp; ·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp; </h2>
+      <div id="1-short" class="indent">
+      {{ entry['desc'] }}
+      </div>
+
+    </div>
+    <!--end content-->
+
+    <!--song-->
+    <br clear="all">
+    <!--eng song-->
+    <!--similar-->
+    <div class="block5 subject_show knnlike">
+      <h2>喜欢看"{{ entry['bookname'] }}"的人也喜欢 &nbsp; ·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp; </h2>
+      <div class="content clearfix">
+        {% for other in others %}
+        <dl>
+          <dt> <a href="/viewbook/{{ other['_id'] }}"><img src="/data/{{ other['cover'] }}" width="90" class="m_sub_img"></a> </dt>
+          <dd><a href="/viewbook/{{ other['_id'] }}">{{ other['bookname'] }}</a></dd>
+        </dl>
+        {% end %}
+      </div>
+    </div>
+        <br clear="all">
+    <!--end similar-->
+    <!--replys-->
+    <div class="clear"></div>
+    <h2>评论&nbsp;· · · · · ·  (0条) </h2>
+    <div id="wt_0">
+          </div>
+    <!--end replay-->
+    <!--add reply-->
+    <span align="right" class="pl2">
+        <a href="/sign/signlg" class="j a_show_login">&gt; 我来回应</a>
+        </span>
+    <!--end add reply-->
+  </div>
+  <!--end article-->
+  <!--begin aside-->
+  <div class="aside">
+    <div class="gray_ad">
+      <h2>Perhaps these · · · · · · </h2> 
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<script language="javascript">
+  function delreply(id){
+     	 var url = '/subjectreply/del';
+		 show_dialog('&lt;div class="loadpop m"&gt;'+notice[0]+'&lt;/div&gt;');
+		 set_overlay();
+		 $.post(url,{id:id,sid:1},function(j){
+                  if (j=="1"){
+                      $('#reply'+id).empty();
+                      setTimeout(function(){
+                         $('#dialog, #overlay').fadeOut(close_dialog);
+                         },400);
+                  }else{
+                     if(j=="-1"){
+                     show_dialog('&lt;div class="loadpop m"&gt;'+notice[2]+'&lt;/div&gt;');
+                     set_overlay();
+                     setTimeout(function(){
+                         $('#dialog, #overlay').fadeOut(close_dialog);
+                     },400);
+                     }
+                     else{
+                        show_dialog('&lt;div class="loadpop m"&gt;'+notice[4]+'&lt;/div&gt;');
+                        set_overlay();
+                         setTimeout(function(){
+                         $('#dialog, #overlay').fadeOut(close_dialog);
+                         },400);
+                     }
+                  }
+			  })				 
+  }
+  
+  $('#subject_reply').click(function(){
+        var contents=$("#cont").val();
+		var title=$('#title').val();
+		if(title=="" || title.replace(/\s/g,"")==""){
+		   show_dialog('&lt;div class="loadpop m"&gt;'+notice[6]+'&lt;/div&gt;');
+		   set_overlay();
+		   setTimeout(function(){
+                $('#dialog, #overlay').fadeOut(close_dialog);
+                            },400);
+		   return false;
+		}
+		if(contents=="" || contents.replace(/\s/g,"")==""){
+		   show_dialog('&lt;div class="loadpop m"&gt;'+notice[5]+'&lt;/div&gt;');
+		   set_overlay();
+		   setTimeout(function(){
+                $('#dialog, #overlay').fadeOut(close_dialog);
+                            },400);
+		   return false;
+		}
+		 var url = '/subjectreply/add';
+		 
+		 show_dialog('&lt;div class="loadpop m"&gt;'+notice[3]+'&lt;/div&gt;');
+         $.post(url,{sid:1,pid:1,title:title,content:contents,update:1},function(j){
+                  if(j=="-1"){
+                       show_dialog('&lt;div class="loadpop m"&gt;'+notice[2]+'&lt;/div&gt;');
+                       set_overlay();
+                       setTimeout(function(){
+                           $('#dialog, #overlay').fadeOut(close_dialog);
+                       },400);
+                  }
+                  else{
+                   if(j){
+                     $('#wt_0').append(j);
+                     $('#cont').val("");
+                     $('#title').val("");
+                     setTimeout(function(){
+                           $('#dialog, #overlay').fadeOut(close_dialog);
+                       },400);
+                   }
+                  }
+		  }
+	  )	
+  }
+)
+</script>
+  <div class="fdiv clearfix"></div>
+{% end %}
+
+</html>
