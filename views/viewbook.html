@@ -51,8 +51,14 @@ jQuery(document).ready(function($){
         </div>
         <div id="interest_sectl">
           <div class="rating_wrap clearbox">
-            <p class="rating_self clearfix"> <span id="starsshow" class="ll bigstar35"></span> <strong id="starsnum" class="ll rating_num">7.5</strong> </p>
-            <p class="rating_self font_normal">(<span id="comnum">47090</span> 人评价)</p>
+            <p class="rating_self clearfix"> <span id="starsshow" class="ll {{ class_star }}"></span> <strong id="starsnum" class="ll rating_num">
+            {% if int(entry['ratenum']) > 0 %}
+            {{ int(entry['rate'])*1.0/int(entry['ratenum']) }}
+            {% else %}
+            0
+            {% end %}
+            </strong> </p>
+            <p class="rating_self font_normal">(<span id="comnum">{{ int(entry['ratenum']) }}</span> 人评价)</p>
           </div>
         </div>
       </div>

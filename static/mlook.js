@@ -1,5 +1,5 @@
-Ensoon = new Object();
-Ensoon.errdetail = ['', '未知错误', '文件过大', '信息不全', '域名错误', '分类错误', '用户错误', '权限不足', '没有文件', '保存文件错误', '不支持的文件格式', '超时', '文件格式有误', '', '添加文件出错', '已经达到容量上限', '不存在的相册', '删除失败']
+Mlook = new Object();
+Mlook.errdetail = ['', '未知错误', '文件过大', '信息不全', '域名错误', '分类错误', '用户错误', '权限不足', '没有文件', '保存文件错误', '不支持的文件格式', '超时', '文件格式有误', '', '添加文件出错', '已经达到容量上限', '不存在的相册', '删除失败']
 notice = ['正在删除，请稍候...', //0
 '服务器忙，删除失败...', //1
 '请先登录...', //2
@@ -20,10 +20,10 @@ var trace = function (o) {
 var report = function (s) {
     $.get('/report?e=' + s)
 }
-Ensoon.EventMonitor = function () {
+Mlook.EventMonitor = function () {
     this.listeners = new Object();
 }
-Ensoon.EventMonitor.prototype.broadcast = function (widgetObj, msg, data) {
+Mlook.EventMonitor.prototype.broadcast = function (widgetObj, msg, data) {
     var lst = this.listeners[msg];
     if (lst != null) {
         for (var o in lst) {
@@ -31,7 +31,7 @@ Ensoon.EventMonitor.prototype.broadcast = function (widgetObj, msg, data) {
         }
     }
 }
-Ensoon.EventMonitor.prototype.subscribe = function (msg, callback) {
+Mlook.EventMonitor.prototype.subscribe = function (msg, callback) {
     var lst = this.listeners[msg];
     if (lst) {
         lst.push(callback);
@@ -39,7 +39,7 @@ Ensoon.EventMonitor.prototype.subscribe = function (msg, callback) {
         this.listeners[msg] = [callback];
     }
 }
-Ensoon.EventMonitor.prototype.unsubscribe = function (msg, callback) {
+Mlook.EventMonitor.prototype.unsubscribe = function (msg, callback) {
     var lst = this.listener[msg];
     if (lst != null) {
         lst = lst.filter(function (ele, index, arr) {
@@ -49,7 +49,7 @@ Ensoon.EventMonitor.prototype.unsubscribe = function (msg, callback) {
 }
 
 // Page scope event-monitor obj.
-var event_monitor = new Ensoon.EventMonitor();
+var event_monitor = new Mlook.EventMonitor();
 
 function load_event_monitor(root) {
     var re = /a_(\w+)/;
@@ -59,7 +59,7 @@ function load_event_monitor(root) {
         if (m) {
             var f = fns[m[1]];
             if (!f) {
-                f = eval("Ensoon.init_" + m[1]);
+                f = eval("Mlook.init_" + m[1]);
                 fns[m[1]] = f;
             }
             f && f(this);
@@ -70,7 +70,7 @@ function load_event_monitor(root) {
 $(function () {
     load_event_monitor(document);
 });
-Ensoon.prettify_form = function (form) {
+Mlook.prettify_form = function (form) {
     $('input:submit', form).each(function (i) {
         var btn = $('<a href="#" class="butt"></a>').text($(this).val());
         btn.click(function () {
@@ -117,7 +117,7 @@ var remote_submit_json = function (form, func, disable, action) {
 }
 
 /* entry vote button */
-Ensoon.init_evb = function (o) {
+Mlook.init_evb = function (o) {
     var eid = $(o).attr("id").split("-")[1];
     $(o).submit(function () {
         var url = "/j/entry/" + eid + "/vote";
@@ -133,7 +133,7 @@ Ensoon.init_evb = function (o) {
 }
 
 /* entry vote count */
-Ensoon.init_evc = function (o) {
+Mlook.init_evc = function (o) {
     var eid = $(o).attr("id").split("-")[1];
     event_monitor.subscribe("entry_" + eid + "_voted", function (caller, data) {
         var count = data.rec_count;
@@ -144,7 +144,7 @@ Ensoon.init_evc = function (o) {
 }
 
 /* entry nointerest button */
-Ensoon.init_enb = function (o) {
+Mlook.init_enb = function (o) {
     var eid = $(o).attr("id").split("-")[1];
     $(o).submit(function () {
         var url = "/j/entry/" + eid + "/nointerest";
@@ -184,7 +184,7 @@ var voteuseless = function (id) {
 }
 
 /* blog entry folding */
-Ensoon.init_bef = function (o) {
+Mlook.init_bef = function (o) {
     var eid = $(o).attr('id').split('entry-')[1],
         unfolder = $('.unfolder', o),
         folder = $('.folder', o),
@@ -222,7 +222,7 @@ Ensoon.init_bef = function (o) {
     }).hover_fold('folder');
 }
 
-Ensoon.init_unfolder_n = function (o) {
+Mlook.init_unfolder_n = function (o) {
     $(o).click(function () {
         var rid = $(o).attr('id').split('-')[1];
         var url = '/j/note/' + rid + '/full';
@@ -239,7 +239,7 @@ Ensoon.init_unfolder_n = function (o) {
     }).hover_fold('unfolder');
 }
 
-Ensoon.init_folder_n = function (o) {
+Mlook.init_folder_n = function (o) {
     $(o).click(function () {
         var rid = $(o).attr('id').split('-')[1];
         $('#note_' + rid + '_full').hide();
@@ -250,7 +250,7 @@ Ensoon.init_folder_n = function (o) {
     }).hover_fold('folder');
 }
 
-Ensoon.init_unfolder = function (o) {
+Mlook.init_unfolder = function (o) {
     $(o).click(function () {
         var rid = $(o).attr('id').split('-')[1];
         var url = '/j/review/' + rid + '/fullinfo';
@@ -266,7 +266,7 @@ Ensoon.init_unfolder = function (o) {
     }).hover_fold('unfolder');
 }
 
-Ensoon.init_folder = function (o) {
+Mlook.init_folder = function (o) {
     $(o).click(function () {
         var rid = $(o).attr('id').split('-')[1];
         $('#review_' + rid + '_full').hide();
@@ -277,7 +277,7 @@ Ensoon.init_folder = function (o) {
 }
 
 /* blog entry voters folding */
-Ensoon.init_bevf = function (o) {
+Mlook.init_bevf = function (o) {
     var eid = $(o).attr('id').split('bevs-')[1];
     var h = $('.voters_header', o);
     if (!h.length) return;
@@ -320,14 +320,14 @@ Ensoon.init_bevf = function (o) {
     l.click(fn);
 };
 
-Ensoon.init_guidelink = function (o) {
+Mlook.init_guidelink = function (o) {
     $(o).click(function () {
         window.open('/help/guide1', '', 'width=640,height=400');
         return false;
     });
 };
 
-Ensoon.init_closelink = function (o) {
+Mlook.init_closelink = function (o) {
     $('<a href="#">关闭</a>').appendTo($(o)).click(function () {
         window.close();
         return false;
@@ -345,7 +345,7 @@ function ext_links() {
 }
 /////////////////////////////////video
 // 添加url
-Ensoon.init_video_addurl = function (o) {
+Mlook.init_video_addurl = function (o) {
     $(o).click(function () {
         pop_win("加载中,请稍等...");
         var vid = $(o).attr('name');
@@ -355,7 +355,7 @@ Ensoon.init_video_addurl = function (o) {
     });
 }
 
-Ensoon.init_collectsong_form = function (form) {
+Mlook.init_collectsong_form = function (form) {
     form.onsubmit = function () {
         remote_submit_json(this, function (data) {
             if (data > 0) {
@@ -384,7 +384,7 @@ Ensoon.init_collectsong_form = function (form) {
 }
 
 //评价subject
-Ensoon.init_subject_collect = function (o) {
+Mlook.init_subject_collect = function (o) {
     $(o).click(function () {
         date = new Date();
         pop_win("加载中,请稍等...");
@@ -429,7 +429,7 @@ Ensoon.init_subject_collect = function (o) {
     });
 }
 
-Ensoon.init_video_del_comment = function (o) {
+Mlook.init_video_del_comment = function (o) {
     var _ = $(o).attr('name').split('-');
     $(o).click(function () {
         var text = o.title;
@@ -447,7 +447,7 @@ Ensoon.init_video_del_comment = function (o) {
 }
 
 ////////////////////////////////////enc video
-Ensoon.init_song_interest = function (o) {
+Mlook.init_song_interest = function (o) {
     var _ = $(o).attr('name').split('-');
     var songstr = $(o).attr("id").split("*")[1];
     var sid = $(o).attr("id").split("*")[2];
@@ -513,7 +513,7 @@ Ensoon.init_song_interest = function (o) {
     }
 }
 ////////////////////////////////////add to list
-Ensoon.init_list_add = function (o) {
+Mlook.init_list_add = function (o) {
     var _ = $(o).attr('name').split('-');
     var date = new Date();
     var url = '/subjectlist/add?time=2';
@@ -561,7 +561,7 @@ Ensoon.init_list_add = function (o) {
         $(o).parent().parent().submit(f);
     }
 }
-Ensoon.init_goods_join = function (o) {
+Mlook.init_goods_join = function (o) {
     var _ = $(o).attr('name').split('-');
     var goodsid = $(o).attr("id").split("-")[1];
     var date = new Date();
@@ -603,7 +603,7 @@ Ensoon.init_goods_join = function (o) {
         $(o).parent().parent().submit(f);
     }
 }
-Ensoon.init_follow_btn = function (o) {
+Mlook.init_follow_btn = function (o) {
     $(o).click(function () {
 
         date = new Date();
@@ -643,7 +643,7 @@ Ensoon.init_follow_btn = function (o) {
         return false;
     });
 }
-Ensoon.init_friend_agree = function (o) {
+Mlook.init_friend_agree = function (o) {
     $(o).click(function () {
         date = new Date();
         var _ = $(this).attr('name').split('-');
@@ -658,7 +658,7 @@ Ensoon.init_friend_agree = function (o) {
         return false;
     });
 }
-Ensoon.init_friend_disagree = function (o) {
+Mlook.init_friend_disagree = function (o) {
     $(o).click(function () {
         date = new Date();
         var _ = $(this).attr('name').split('-');
@@ -673,7 +673,7 @@ Ensoon.init_friend_disagree = function (o) {
         return false;
     });
 }
-Ensoon.init_friend_btn = function (o) {
+Mlook.init_friend_btn = function (o) {
     var _ = $(o).attr('name').split('-');
     var id = _[1];
     var date = new Date();
@@ -712,7 +712,7 @@ Ensoon.init_friend_btn = function (o) {
         $(o).parent().parent().submit(f);
     }
 }
-Ensoon.init_confirm_link = function (o) {
+Mlook.init_confirm_link = function (o) {
     if (!o.name) {
         //alert(o.name);
         $(o).click(function () {
@@ -759,7 +759,7 @@ var populate_tag_btns = function (title, div, tags, hash) {
     }
 }
 
-Ensoon.init_interest_form = function (form) {
+Mlook.init_interest_form = function (form) {
     $(form).submit(function () {
         var sid = 1;
         remote_submit_json(this, function (data) {
@@ -780,7 +780,7 @@ Ensoon.init_interest_form = function (form) {
     });
 }
 
-Ensoon.init_stars = function (o) {
+Mlook.init_stars = function (o) {
     var ratewords = {
         1: '很差',
         2: '较差',
@@ -816,7 +816,7 @@ Ensoon.init_stars = function (o) {
         lighten_stars(0);
     });
 }
-Ensoon.init_gstars = function (o) {
+Mlook.init_gstars = function (o) {
     var ratewords = {
         1: '-2',
         2: '-1',
@@ -852,7 +852,7 @@ Ensoon.init_gstars = function (o) {
         lighten_stars(0);
     });
 }
-Ensoon.init_show_add_friend = function (o) {
+Mlook.init_show_add_friend = function (o) {
     var uid = $(o).attr('id').split('showaf_')[1];
     $(o).click(function () {
         url = "/j/people/" + uid + "/friendform";
@@ -863,7 +863,7 @@ Ensoon.init_show_add_friend = function (o) {
     });
 }
 
-Ensoon.init_tries_to_listen = function (o) {
+Mlook.init_tries_to_listen = function (o) {
     var m = $(o).attr('name');
     $(o).click(function () {
         var isFF = !document.all;
@@ -882,7 +882,7 @@ Ensoon.init_tries_to_listen = function (o) {
     });
 }
 
-Ensoon.init_discover = function (o) {
+Mlook.init_discover = function (o) {
     $(o).submit(function (form) {
         var cat = "";
         cat = $(":radio:checked")[0].value;
@@ -912,7 +912,7 @@ var friend_form_update = function (data, uid) {
     });
 }
 
-Ensoon.init_review_full = function (o) {
+Mlook.init_review_full = function (o) {
     var i = $(o).attr('id').split('_');
     var rid = i[1];
     var stype = i[2];
@@ -926,7 +926,7 @@ Ensoon.init_review_full = function (o) {
     });
 }
 
-Ensoon.init_show_login = function (o) {
+Mlook.init_show_login = function (o) {
     $(o).click(function () {				 
 		var url='/sign/min';
 		$.getJSON(url, {}, function (r) {
@@ -935,7 +935,7 @@ Ensoon.init_show_login = function (o) {
 		return false;
     });
 }
-Ensoon.init_review_btn = function (o) {
+Mlook.init_review_btn = function (o) {
     $(o).click(function () {
         if ($('#hiddendialog').length) {
             show_dialog($('#hiddendialog').html());
@@ -1016,13 +1016,13 @@ function get_cookie(name) {
     }
     return null;
 }
-Ensoon.init_hideme = function (o) {
+Mlook.init_hideme = function (o) {
     $(o).click(function () {
         $(this).parent().parent().parent().hide();
     });
 }
 
-Ensoon.init_more = function (o) {
+Mlook.init_more = function (o) {
     $(o).click(function () {
         lastObj = $(this).prev().find("input");
         ids = /(.*_)(\d+)$/.exec(lastObj.attr("id"));
@@ -1034,7 +1034,7 @@ Ensoon.init_more = function (o) {
     })
 }
 
-Ensoon.init_search_text = function (o) {
+Mlook.init_search_text = function (o) {
     if (!o.value || o.value == o.title) {
         $(o).addClass("greyinput");
         o.value = o.title;
@@ -1051,7 +1051,7 @@ Ensoon.init_search_text = function (o) {
     });
 }
 
-Ensoon.init_checkreg = function (o) {
+Mlook.init_checkreg = function (o) {
     $(o).find('.butt').click(function () {
         var check = true;
         $(o).find('input').each(function () {
@@ -1068,7 +1068,7 @@ Ensoon.init_checkreg = function (o) {
     });
 }
 
-Ensoon.init_click_tip = function (o) {
+Mlook.init_click_tip = function (o) {
     var tip = $(o).next('.blocktip');
     $(o).click(function () {
         tip.show().blur_hide();
@@ -1085,7 +1085,7 @@ function cleanTip() {
         $("#search_auto")[0].value = '';
     }
 }
-Ensoon.init_submit_link = function (o) {
+Mlook.init_submit_link = function (o) {
     $(o).click(function () {
         $(o).parent().submit();
     });
@@ -1221,13 +1221,13 @@ var refine_dialog = function () {
     $("#dialog,#overlay").css("top", c);
     set_overlay()
 };
-Ensoon.init_show_full = function (b) {
+Mlook.init_show_full = function (b) {
     $(b).click(function () {
         $(b).parents(".short").hide();
         $(b).parents(".short").next().show()
     })
 };
-Ensoon.init_show_short = function (b) {
+Mlook.init_show_short = function (b) {
     $(b).click(function () {
         $(b).parents(".all").hide();
         $(b).parents(".all").prev().show()
@@ -1235,7 +1235,7 @@ Ensoon.init_show_short = function (b) {
 };
 
 
-Ensoon.init_collect_btn = function (o) {
+Mlook.init_collect_btn = function (o) {
     $(o).click(function () {
 
 
@@ -1262,7 +1262,7 @@ Ensoon.init_collect_btn = function (o) {
     });
 }
 //评价专辑
-Ensoon.init_album_rec = function (o) {
+Mlook.init_album_rec = function (o) {
     $(o).click(function () {
         date = new Date();
         pop_win("加载中,请稍等...");
@@ -1304,7 +1304,7 @@ Ensoon.init_album_rec = function (o) {
     });
 }
 //收藏专辑
-Ensoon.init_albumcollect_btn = function (o) {
+Mlook.init_albumcollect_btn = function (o) {
     $(o).click(function () {
         date = new Date();
         var _ = $(this).attr('name').split('-');
@@ -1329,7 +1329,7 @@ Ensoon.init_albumcollect_btn = function (o) {
     });
 }
 //专辑删除音乐
-Ensoon.init_albumdelsong_link = function (o) {
+Mlook.init_albumdelsong_link = function (o) {
     if (!o.name) {
         //alert(o.name);
         $(o).click(function () {
@@ -1365,7 +1365,7 @@ Ensoon.init_albumdelsong_link = function (o) {
     }
 }
 //评价音乐
-Ensoon.init_song_rec = function (o) {
+Mlook.init_song_rec = function (o) {
     $(o).click(function () {
         date = new Date();
         pop_win("加载中,请稍等...");
@@ -1407,7 +1407,7 @@ Ensoon.init_song_rec = function (o) {
     });
 }
 //add list 
-Ensoon.init_listaddsubject_form = function (form) {
+Mlook.init_listaddsubject_form = function (form) {
     form.onsubmit = function () {
         remote_submit_json(this, function (data) {
             if (data > 0) {
@@ -1434,7 +1434,7 @@ Ensoon.init_listaddsubject_form = function (form) {
     }
     $(form).set_len_limit(2000);
 }
-Ensoon.init_listcollect_btn = function (o) {
+Mlook.init_listcollect_btn = function (o) {
     $(o).click(function () {
 
 
@@ -1461,7 +1461,7 @@ Ensoon.init_listcollect_btn = function (o) {
     });
 }
 
-Ensoon.init_nine_collect_btn = function (o) {
+Mlook.init_nine_collect_btn = function (o) {
     $(o).click(function () {
         var _ = $(this).attr('name').split('-');
         var btn_type = _[0],
@@ -1480,7 +1480,7 @@ Ensoon.init_nine_collect_btn = function (o) {
                 hash[tag.toLowerCase()] = true;
             });
             populate_tag_btns('我的标签(点击添加):', $('#mytags', html), r.my_tags, hash);
-            populate_tag_btns("Ensoon成员常用的标签(点击添加):", $('#populartags', html), r.popular_tags, hash);
+            populate_tag_btns("Mlook成员常用的标签(点击添加):", $('#populartags', html), r.popular_tags, hash);
             if (btn_type == 'pbtn') $('form', html).append('<div id="src_pbtn"></div>');
             $("#collect_form_" + sid).html("").append('<p class="ul"></p>').append(html);
             load_event_monitor($("#collect_form_" + sid));
@@ -1489,7 +1489,7 @@ Ensoon.init_nine_collect_btn = function (o) {
     });
 }
 //talk about song
-Ensoon.init_rec_btn = function (o) {
+Mlook.init_rec_btn = function (o) {
     var _ = $(o).attr('name').split('-');
     var date = new Date();
     var url = '/rec/songrec/?time=' + date.getSeconds();
@@ -1533,7 +1533,7 @@ Ensoon.init_rec_btn = function (o) {
         $(o).parent().parent().submit(f);
     }
 }
-Ensoon.init_rec_form = function (form) {
+Mlook.init_rec_form = function (form) {
     form.onsubmit = function () {
         remote_submit_json(this, function (data) {
             $('#dialog').html('<div class="loadpop m">提交成功</div>');
@@ -1550,7 +1550,7 @@ Ensoon.init_rec_form = function (form) {
     }
     $(form).set_len_limit(2000);
 }
-Ensoon.init_goods_rec = function (o) {
+Mlook.init_goods_rec = function (o) {
     var _ = $(o).attr('name').split('-');
     var date = new Date();
     var url = '/rec/goodsrec';
@@ -1599,7 +1599,7 @@ Ensoon.init_goods_rec = function (o) {
         $(o).parent().parent().submit(f);
     }
 }
-Ensoon.init_rec_reply = function (o) {
+Mlook.init_rec_reply = function (o) {
     var _ = o.name.split('-');
     var url = '/j/rec_comment';
     if (!o.rev) {
@@ -1628,7 +1628,7 @@ Ensoon.init_rec_reply = function (o) {
     })
 }
 
-Ensoon.init_reply_form = function (form) {
+Mlook.init_reply_form = function (form) {
     $(form).attr('action', $(form).attr('rev'));
     var n = $(form).attr('name');
     $(form).submit(function () {
@@ -1653,7 +1653,7 @@ Ensoon.init_reply_form = function (form) {
     $(form).set_len_limit(140);
 }
 
-Ensoon.init_video_comment = function (form) {
+Mlook.init_video_comment = function (form) {
     $(form).submit(function () {
         remote_submit_json(this, function (r) {
             var insert_point = $('#comments');
@@ -1667,7 +1667,7 @@ Ensoon.init_video_comment = function (form) {
     })
 }
 
-Ensoon.init_noti_form = function (form) {
+Mlook.init_noti_form = function (form) {
     $(":submit", form).click(function () {
         $(this).addClass('selected');
     });
@@ -1690,7 +1690,7 @@ Ensoon.init_noti_form = function (form) {
     });
 }
 
-Ensoon.init_editable = function (o) {
+Mlook.init_editable = function (o) {
     var disp = $('#display', o),
         form = $('form', o)[0],
         a = $('a', '#edi');
@@ -1729,7 +1729,7 @@ Ensoon.init_editable = function (o) {
     })
 }
 
-Ensoon.init_show_video = function (o) {
+Mlook.init_show_video = function (o) {
     var eid = paras($(o).attr('href'))['from'];
     $(o).css('position', 'relative').attr('href', 'javascript:void(0)').attr('target', '');
     var overlay = $('<div></div>').addClass('video_overlay');
@@ -1749,7 +1749,7 @@ Ensoon.init_show_video = function (o) {
     })
 }
 
-Ensoon.init_morerec = function (o) {
+Mlook.init_morerec = function (o) {
     $(o).click(function () {
         var n = $(o).parent().next();
         if (n.is(':hidden')) {
@@ -1761,7 +1761,7 @@ Ensoon.init_morerec = function (o) {
     })
 }
 
-Ensoon.init_search_result = function (o) {
+Mlook.init_search_result = function (o) {
     $('#sinput').suggest('/j/subject_suggest', {
         resultsClass: 'rc_results',
         onSelect: function () {
@@ -1770,7 +1770,7 @@ Ensoon.init_search_result = function (o) {
     });
 }
 
-Ensoon.init_prompt_link = function (o) {
+Mlook.init_prompt_link = function (o) {
     $(o).click(function () {
         var val = prompt(o.title || '请输入');
         if (val) {
