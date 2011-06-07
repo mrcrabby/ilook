@@ -5,6 +5,7 @@ import urlparse
 import httplib
 
 import tornado.web
+from pymongo.objectid import ObjectId
 
 from rules import *
         
@@ -15,9 +16,10 @@ class BaseHandler(tornado.web.RequestHandler):
         return self.application.db
 
     def get_current_user(self):
-        user_id = self.get_secure_cookie("user")
+        user_id = self.get_secure_cookie("uid")
         if not user_id: return None
-        return self.db.get("SELECT * FROM authors WHERE id = %s", int(user_id))
+        #return self.db.get("SELECT * FROM authors WHERE id = %s", int(user_id))
+        return self.db.user.find_one({'_id':ObjectId(user_id)})
     
     def get_error_html(self, status_code, **kwargs):
         """custom error pages.

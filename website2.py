@@ -50,6 +50,10 @@ class Application(tornado.web.Application):
             (r"/viewbook/([a-z0-9]+)",ViewbookHandler),
             (r"/crawl/([a-z0-9]+)", BookcrawHandler),
             (r"/crawl/([a-z0-9]+).(epub|mobi)", DownHandler),
+            (r"/login", AuthLoginHandler),
+            (r"/logout", AuthLogoutHandler),
+            (r"/upload", UploadHandler),
+            (r"/sigup", SigupHandler),
         ]
         settings = dict(
             template_path = os.path.join(os.path.dirname(__file__), "views"),
@@ -58,6 +62,7 @@ class Application(tornado.web.Application):
             cookie_secret = "kL5gEmGeJJFuYh711oETzKXQAGaYdEQnp2XdTP1o/Vo=",
             debug = options.debug,
             login_url = "/login",
+            ui_modules={"Userstats": UserModule},
         )
         tornado.web.Application.__init__(self, urls, **settings)
         
@@ -72,6 +77,10 @@ class Application(tornado.web.Application):
         
         logging.basicConfig(level=logging.ERROR, format='%(asctime)s:%(msecs)03d %(levelname)-8s %(message)s',
             datefmt='%m-%d %H:%M', filename= os.path.join(os.path.dirname(__file__), "logs", "website.log"), filemode='a')
+
+class UserModule(tornado.web.UIModule):
+    def render(self, user=None):
+        return self.render_string("modules/userstats.html", user=user)
         
 def main():
     tornado.options.parse_command_line()

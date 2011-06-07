@@ -2017,7 +2017,7 @@ function pop_win(htm) {
         dom = js_parser(htm);
     if (htm == '加载中,请稍等...') {
 
-        b.innerHTML = '<div style="visibility: visible; top: 68px; left: 320px; width: 350px;"><span class="gact rr"><a onClick="pop_win.close()" href="javascript:;" class="pop_win_close">X</a></span><div class="rectitle" style="background-color: #EBF5EB;"><h2>加载  · · · · · ·</h2></div><div align="center"><img src="http://img.ensoon.com/pics/spinner.gif"/> 加载中,请稍等...</div></div>';
+        b.innerHTML = '<div style="visibility: visible; top: 68px; left: 320px; width: 350px;"><span class="gact rr"><a onClick="pop_win.close()" href="javascript:;" class="pop_win_close">X</a></span><div class="rectitle" style="background-color: #EBF5EB;"><h2>加载  · · · · · ·</h2></div><div align="center"><img src="/pics/spinner.gif"/> 加载中,请稍等...</div></div>';
     } else {
         b.innerHTML = '<a onclick="pop_win.close()" href="javascript:;" class="pop_win_close">X</a>' + dom.htm;
     }

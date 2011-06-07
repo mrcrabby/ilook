@@ -15,6 +15,8 @@ sys.path.append(os.path.dirname(__file__))
 from homehandlers import *
 from bookhandlers import *
 from viewbookhandlers import *
+from uploadhandlers import *
+from loginhandlers import *
 
 
 class CrawHandler(BaseHandler):

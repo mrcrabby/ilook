@@ -17,4 +17,5 @@ class BookHandler(BaseHandler):
         perpage = 10
         pagehtml = pageFun.pageFun(totlenum,perpage,page,url)
         entries=self.db.book.find().limit(perpage).skip((page-1)*perpage)
-        self.render("booklist.html",entries=entries,pagehtml=pagehtml)
+        user = self.get_current_user()
+        self.render("booklist.html",entries=entries,pagehtml=pagehtml,user=user)

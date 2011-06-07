@@ -22,21 +22,7 @@
 {% block head %}{% end %}
 </head>
 <body>
-<div class="top-nav">
-  <div class="bd">
-    <div class="top-nav-info">
-        <a href="">登录</a> <a href="">注册</a>
-    </div>
-    <div class="top-nav-items">
-      <ul>
-		<li class="on"> <a href="/">首页 Home </a> </li>
-		<li> <a href="/book">读书 Read </a> </li>
-		<li> <a href="/movie">音影 Movie </a> </li>
-		<li> <a href="/bbs">论坛 Forums </a> </li>
-	  </ul>
-    </div>
-  </div>
-</div>
+{{ modules.Userstats(user) }}
 
 <div id="wrapper">
 	<!--header-->
@@ -61,7 +47,7 @@
 			</div>
 			<div class="site-nav-items">
 			  <ul>
-				<li> <a href="/movie">音影</a> </li>
+				<!-- <li> <a href="/movie">音影</a> </li> -->
 				<li> <a href="/book">读书</a> </li>
 				<li> <a href="/upload">上传</a> </li>
 				<li> <a href="/crawl">crawl</a> </li>
